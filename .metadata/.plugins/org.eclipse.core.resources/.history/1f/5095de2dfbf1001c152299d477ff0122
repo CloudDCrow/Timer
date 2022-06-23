@@ -1,0 +1,11 @@
+package time;
+
+import javax.swing.JTextField;
+
+public class TextInput extends JTextField{
+	
+	public TextInput() {
+		this.setText("llol");
+		this.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+	}
+}

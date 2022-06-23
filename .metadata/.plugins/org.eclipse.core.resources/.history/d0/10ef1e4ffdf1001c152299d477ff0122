@@ -1,0 +1,13 @@
+package time;
+
+import javax.swing.JTextField;
+
+@SuppressWarnings("serial")
+public class TextInput extends JTextField{
+	
+	public TextInput() {
+		TextPrompt t = new TextPrompt("insert minutes", this);
+		t.changeAlpha(150);
+		t.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+	}
+}

@@ -1,0 +1,86 @@
+package time;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class TimerClock {
+	
+	private final static int SCREEN_WIDTH = 400;
+	private final static int SCREEN_HEIGHT = 300;
+	private final static int MILLISECONDS_IN_HOUR = 3600000;
+
+	public static void main(String[] args) {
+		
+		LocalTime currentTime = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
+		ActionEvent e = new ActionEvent(e, 0, null);
+		//Time class starts with 1 hour
+		Time time = new Time(-MILLISECONDS_IN_HOUR);
+		
+		Frame frame = new Frame(SCREEN_WIDTH, SCREEN_HEIGHT);
+		Panel topPanel = new Panel(50, 135);
+		Panel countdownPanel = new Panel(150, 165);
+		Panel inputPanel1 = new Panel(30, 195);
+		Panel inputPanel2 = new Panel(50, 195);
+		Panel inputPanel3 = new Panel(50, 195);
+
+		inputPanel1.setLayout(new GridLayout());
+
+		Panel buttonsPanel = new Panel(70, 225);
+		buttonsPanel.setLayout(new GridLayout());
+		
+		Label clock = new Label(currentTime.toString(), 20);
+				
+		Label countdown = new Label(time.toString(), 50);
+		countdown.setHorizontalAlignment(JLabel.CENTER);
+		
+		TextInput text = new TextInput();
+		text.setHorizontalAlignment(JTextField.CENTER);
+
+
+		Button startButton = new Button("Start");
+		
+		Button stopButton = new Button("Stop");
+
+		frame.setVisible(true);
+
+		frame.add(topPanel);
+		frame.add(countdownPanel);
+		frame.add(inputPanel1);
+		frame.add(buttonsPanel);
+
+		topPanel.add(clock);
+		countdownPanel.add(countdown);
+		inputPanel1.add(inputPanel2);
+		inputPanel1.add(text);
+		inputPanel1.add(inputPanel3);
+
+		buttonsPanel.add(startButton);
+		buttonsPanel.add(stopButton);
+		
+		frame.pack();
+
+		while(true) {
+			updateTime(currentTime, clock);
+			submitInput(e, startButton, text);
+		}
+	}
+	
+	public static void updateTime(LocalTime t, Label label) {
+		 t = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
+		 label.setText(t.toString());
+	}
+	
+	public static void actionPerformed(ActionEvent e, Button b, TextInput t) {
+		if(e.getSource() == b) {
+			System.out.println(t.getText());
+		}
+	}
+	
+	
+}

@@ -1,0 +1,10 @@
+package time;
+
+import javax.swing.JTextField;
+
+public class TextInput{
+	
+	public TextInput() {
+		JTextField text = new JTextField("lol");
+	}
+}
